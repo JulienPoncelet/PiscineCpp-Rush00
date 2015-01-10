@@ -8,7 +8,7 @@ class Enemy : public virtual AShip {
 public:
 
 	Enemy(void);
-	Enemy(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg);
+	Enemy(uint x, uint y, AObject::plan_e z, Map * map, uint hp, uint max_hp, uint dmg);
 	Enemy(Enemy const & src);
 	~Enemy(void);
 

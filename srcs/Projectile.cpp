@@ -6,8 +6,8 @@ Projectile::Projectile(void) : AObject() {
 	return ;
 }
 
-Projectile::Projectile(uint x, uint y, AObject::plan_e z, direction_e dir, uint dmg)
-						: AObject(x, y, z) {
+Projectile::Projectile(uint x, uint y, AObject::plan_e z, Map * map, direction_e dir, uint dmg)
+						: AObject(x, y, z, map) {
 	setDir(dir);
 	setDmg(dmg);
 	return ;
