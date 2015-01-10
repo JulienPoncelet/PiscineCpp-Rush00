@@ -10,6 +10,7 @@ class Map {
 public:
 
 	Map(void);
+	Map(uint maxX, uint maxY);
 	Map(Map const & src);
 	~Map(void);
 

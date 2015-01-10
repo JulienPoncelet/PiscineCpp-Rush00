@@ -12,7 +12,7 @@ public:
 	Player(void);
 	Player(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg);
 	Player(Player const & src);
-	virtual ~Player(void);
+	~Player(void);
 
 	Player 					& operator=(Player const & src);
 

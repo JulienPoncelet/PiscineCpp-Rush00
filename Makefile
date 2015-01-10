@@ -20,7 +20,9 @@ SRC = 	main.cpp\
 		AShip.cpp\
 		Player.cpp\
 		Enemy.cpp\
-		Projectile.cpp
+		Projectile.cpp\
+		Map.cpp\
+		CObject.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

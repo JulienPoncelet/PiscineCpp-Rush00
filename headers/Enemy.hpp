@@ -12,7 +12,7 @@ public:
 	Enemy(void);
 	Enemy(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg);
 	Enemy(Enemy const & src);
-	virtual ~Enemy(void);
+	~Enemy(void);
 
 	Enemy 					& operator=(Enemy const & src);
 

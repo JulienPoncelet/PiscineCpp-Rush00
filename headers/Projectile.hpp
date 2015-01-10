@@ -12,7 +12,7 @@ public:
 	Projectile(void);
 	Projectile(uint x, uint y, AObject::plan_e z, direction_e dir, uint dmg);
 	Projectile(Projectile const & src);
-	virtual ~Projectile(void);
+	~Projectile(void);
 
 	Projectile 				& operator=(Projectile const & src);
 
