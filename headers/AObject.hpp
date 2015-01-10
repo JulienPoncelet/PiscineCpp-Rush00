@@ -1,12 +1,12 @@
 #ifndef AOBJECT_HPP
 # define AOBJECT_HPP
 
-# include <iostream>
+class AObject;
+
 # include <sstream>
 
-// # include <Map.hpp>
-
-typedef unsigned int uint;
+# include <Map.hpp>
+# include <ft_retro.hpp>
 
 class AObject {
 
@@ -34,12 +34,12 @@ public:
 	uint					getX(void) const;
 	uint					getY(void) const;
 	plan_e					getZ(void) const;
-	// Map 					* getMap(void) const;	
+	Map 					* getMap(void) const;	
 
 	void					setIndex(uint index);
 	void					setX(uint x);
 	void					setY(uint y);
-	// void					setMap(Map * map);
+	void					setMap(Map * map);
 
 protected:
 
@@ -47,7 +47,7 @@ protected:
 	uint					_x;
 	uint					_y;
 	plan_e const			_z;
-	// Map						* _map;
+	Map						* _map;
 
 };
 

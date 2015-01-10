@@ -1,9 +1,8 @@
 #ifndef ENEMY_HPP
 # define ENEMY_HPP
 
-# include <iostream>
-
-# include <AShip.hpp>
+# include <Aship.hpp>
+# include <ft_retro.hpp>
 
 class Enemy : public virtual AShip {
 

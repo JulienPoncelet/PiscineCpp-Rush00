@@ -1,8 +1,9 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include <iostream>
+class Map;
 
+# include <ft_retro.hpp>
 # include <AObject.hpp>
 # include <CObject.hpp>
 

@@ -16,13 +16,13 @@ DIRSRC = ./srcs/
 DIROBJ = ./obj/
 
 SRC = 	main.cpp\
+		Map.cpp\
+		CObject.cpp\
 		AObject.cpp\
 		AShip.cpp\
 		Player.cpp\
 		Enemy.cpp\
 		Projectile.cpp\
-		Map.cpp\
-		CObject.cpp\
 		Window.cpp
 
 OBJ = $(SRC:.cpp=.o)

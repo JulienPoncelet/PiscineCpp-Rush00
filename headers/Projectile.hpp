@@ -1,9 +1,8 @@
 #ifndef PROJECTILE_HPP
 # define PROJECTILE_HPP
 
-# include <iostream>
-
 # include <AObject.hpp>
+# include <ft_retro.hpp>
 
 class Projectile : public virtual AObject {
 

@@ -2,8 +2,7 @@
 # define WINDOW_CLASS
 
 # include <iostream>
-# include <string>
-
+# include <sstream>
 # include <ncurses.h>
 
 class Window

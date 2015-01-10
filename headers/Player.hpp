@@ -1,9 +1,7 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
-# include <iostream>
-
-# include <AShip.hpp>
+# include <Aship.hpp>
 
 class Player : public virtual AShip {
 

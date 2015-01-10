@@ -1,7 +1,7 @@
 #ifndef COBJECT_HPP
 # define COBJECT_HPP
 
-# include <iostream>
+class CObject;
 
 # include <AObject.hpp>
 

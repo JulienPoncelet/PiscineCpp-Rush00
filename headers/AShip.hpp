@@ -1,8 +1,7 @@
 #ifndef SHIP_HPP
 # define SHIP_HPP
 
-# include <iostream>
-
+# include <ft_retro.hpp>
 # include <AObject.hpp>
 
 class AShip : public virtual AObject {
