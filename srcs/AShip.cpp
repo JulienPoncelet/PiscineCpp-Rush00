@@ -1,4 +1,4 @@
-#include "AShip.hpp"
+#include <ft_retro.hpp>
 
 AShip::AShip(void) : AObject() {
 	setHp(1);

@@ -1,4 +1,4 @@
-#include "CObject.hpp"
+#include <ft_retro.hpp>
 
 CObject						* CObject::_first = NULL;
 CObject						* CObject::_last = NULL;

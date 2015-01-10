@@ -1,11 +1,6 @@
 #ifndef AOBJECT_HPP
 # define AOBJECT_HPP
 
-class AObject;
-
-# include <sstream>
-
-# include <Map.hpp>
 # include <ft_retro.hpp>
 
 class AObject {

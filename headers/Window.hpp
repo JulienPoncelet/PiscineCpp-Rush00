@@ -1,10 +1,6 @@
 #ifndef WINDOW_CLASS
 # define WINDOW_CLASS
 
-# include <iostream>
-# include <sstream>
-# include <ncurses.h>
-
 class Window
 {
 private:

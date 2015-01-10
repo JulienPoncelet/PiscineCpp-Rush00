@@ -1,7 +1,6 @@
 #ifndef PROJECTILE_HPP
 # define PROJECTILE_HPP
 
-# include <AObject.hpp>
 # include <ft_retro.hpp>
 
 class Projectile : public virtual AObject {

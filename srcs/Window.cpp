@@ -1,8 +1,4 @@
-#include "Window.hpp"
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <ncurses.h>
+#include <ft_retro.hpp>
 
 // constructors /destructor
 Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2) {

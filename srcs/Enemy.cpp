@@ -1,4 +1,4 @@
-#include "Enemy.hpp"
+#include <ft_retro.hpp>
 
 uint						Enemy::_amount = 0;
 

@@ -2,7 +2,6 @@
 # define SHIP_HPP
 
 # include <ft_retro.hpp>
-# include <AObject.hpp>
 
 class AShip : public virtual AObject {
 

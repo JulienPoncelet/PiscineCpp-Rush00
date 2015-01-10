@@ -1,9 +1,7 @@
 #ifndef COBJECT_HPP
 # define COBJECT_HPP
 
-class CObject;
-
-# include <AObject.hpp>
+# include <ft_retro.hpp>
 
 class CObject {
 
