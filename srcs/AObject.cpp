@@ -8,7 +8,7 @@ AObject::AObject(void) : _z(MIDDLEGROUND) {
 }
 
 // ADD MAP
-AObject::AObject(uint x, uint y, uint z) : _z(z) {
+AObject::AObject(uint x, uint y, plan_e z) : _z(z) {
 	setX(x);
 	setY(y);
 	// setMap(Map);
@@ -36,6 +36,12 @@ std::ostream 				& operator<<(std::ostream & out, AObject const & rhs){
 	return out;
 }
 
+void						AObject::move(uint x, uint y) {
+	setX(x);
+	setY(y);
+	return ;
+}
+
 std::string 				AObject::toString(void) const {
 	std::ostringstream 		out;
 
@@ -49,6 +55,10 @@ std::string 				AObject::toString(void) const {
 	return out.str();
 }
 
+uint				AObject::getIndex(void) const {
+	return _index;
+}
+
 uint				AObject::getX(void) const {
 	return _x;
 }
@@ -57,13 +67,18 @@ uint				AObject::getY(void) const {
 	return _y;
 }
 
-uint				AObject::getZ(void) const {
+AObject::plan_e		AObject::getZ(void) const {
 	return _z;
 }
 
 // Map 				AObject::getMap(void) const {
 // 	return _map;
 // }
+
+void				AObject::setIndex(uint index) {
+	_index = index;
+	return ;
+}
 
 void				AObject::setX(uint x) {
 	_x = x;

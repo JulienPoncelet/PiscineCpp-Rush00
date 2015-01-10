@@ -7,7 +7,7 @@ AShip::AShip(void) : AObject() {
 	return ;
 }
 
-AShip::AShip(uint x, uint y, uint z, uint hp, uint max_hp, uint dmg) : AObject(x, y, z) {
+AShip::AShip(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg) : AObject(x, y, z) {
 	setHp(hp);
 	setMaxHp(max_hp);
 	setDmg(dmg);

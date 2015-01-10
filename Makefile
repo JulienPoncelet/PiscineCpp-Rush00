@@ -18,7 +18,9 @@ DIROBJ = ./obj/
 SRC = 	main.cpp\
 		AObject.cpp\
 		AShip.cpp\
-		Player.cpp
+		Player.cpp\
+		Enemy.cpp\
+		Projectile.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

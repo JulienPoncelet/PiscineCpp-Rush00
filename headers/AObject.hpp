@@ -13,33 +13,40 @@ class AObject {
 public:
 
 	enum plan_e {
-		BACKGROUND = 0, MIDDLEGROUND, FOREGROUND
+		BACKGROUND = 1, MIDDLEGROUND, FOREGROUND
+	};
+
+	enum direction_e {
+		UP = 1, RIGHT, DOWN, LEFT 
 	};
 
 	AObject(void);
-	AObject(uint x, uint y, uint z);
+	AObject(uint x, uint y, plan_e z);
 	AObject(AObject const & src);
 	virtual ~AObject(void);
 
 	AObject 				& operator=(AObject const & src);
 
-	virtual void			move(uint x, uint y) = 0;
+	void					move(uint x, uint y);
 	virtual std::string		toString(void) const;
 	
+	uint					getIndex(void) const;
 	uint					getX(void) const;
 	uint					getY(void) const;
-	uint					getZ(void) const;
+	plan_e					getZ(void) const;
 	// Map 					* getMap(void) const;	
 
+	void					setIndex(uint index);
 	void					setX(uint x);
 	void					setY(uint y);
 	// void					setMap(Map * map);
 
 protected:
 
+	uint					_index;
 	uint					_x;
 	uint					_y;
-	uint const				_z;
+	plan_e const			_z;
 	// Map						* _map;
 
 };

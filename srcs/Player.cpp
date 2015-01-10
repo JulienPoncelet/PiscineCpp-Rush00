@@ -1,11 +1,15 @@
 #include "Player.hpp"
 
+uint						Player::_amount = 0;
+
 Player::Player(void) : AObject(), AShip() {
+	setIndex(_amount++);
 	return ;
 }
 
-Player::Player(uint x, uint y, uint z, uint hp, uint max_hp, uint dmg)
+Player::Player(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg)
 				: AObject(x, y, z), AShip(x, y, z, hp, max_hp, dmg) {
+	setIndex(_amount++);
 	return ;
 }
 
@@ -36,7 +40,7 @@ std::string 				Player::toString(void) const {
 	std::ostringstream 		out;
 
 	out << "\033[36m";
-	out << "Player:" << std::endl;
+	out << "Player #" << getIndex() << std::endl;
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;
@@ -57,11 +61,6 @@ void			Player::shoot(void) const {
 
 void			Player::destroy(void) {
 	// getMap().popItem(this);
-	return ;
-}
-
-void			Player::move(uint x, uint y) {
-	setX(x);
-	setY(y);
+	// FINISH GAME
 	return ;
 }
