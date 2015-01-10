@@ -3,12 +3,14 @@
 Map::Map(void) {
 	setMaxX(20);
 	setMaxY(40);
+	setList(NULL);
 	return ;
 }
 
-Map::Map(uint maxX, uint maxY) {
+Map::Map(uint maxX, uint maxY, CObject * newList) {
 	setMaxX(maxX);
 	setMaxY(maxY);
+	setList(newList);
 	return ;
 }
 
@@ -24,6 +26,7 @@ Map::~Map(void) {
 Map & Map::operator=(Map const & rhs) {
 	setMaxX(rhs.getMaxX());
 	setMaxY(rhs.getMaxY());
+	setList(rhs.getList());
 	return *this;
 }
 
@@ -39,6 +42,7 @@ std::string 				Map::toString(void) const {
 	out << "Map:" << std::endl;
 	out << "\tMax X: " << getMaxX() << std::endl;
 	out << "\tMax Y: " << getMaxY() << std::endl;
+	out << "\tList: " << getList() << std::endl;
 	out << "\033[0m";
 	return out.str();
 }
@@ -49,14 +53,12 @@ void						Map::display(void) const {
 }
 
 void						Map::pushObject(AObject * newObject) {
-	std::cout << "J'add l'objt:" << std::endl;
-	std::cout << *newObject << std::endl;
+	getList()->addObject(newObject);	
 	return ;
 }
 
-void						Map::popObject(uint index) {
-	std::cout << "Je remove l'objt:" << std::endl;
-	std::cout << index << std::endl;
+void						Map::popObject(AObject * newObject) {
+	getList()->removeObject(newObject);	
 	return ;
 }
 
@@ -68,6 +70,10 @@ uint						Map::getMaxY(void) const {
 	return _maxY;
 }
 
+CObject						* Map::getList(void) const {
+	return _list;
+}
+
 void						Map::setMaxX(uint maxX) {
 	_maxX = maxX;
 	return ;
@@ -76,4 +82,8 @@ void						Map::setMaxX(uint maxX) {
 void						Map::setMaxY(uint maxY) {
 	_maxY = maxY;
 	return ;
+}
+
+void						Map::setList(CObject * newList) {
+	_list = newList;
 }

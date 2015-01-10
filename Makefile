@@ -22,7 +22,8 @@ SRC = 	main.cpp\
 		Enemy.cpp\
 		Projectile.cpp\
 		Map.cpp\
-		CObject.cpp
+		CObject.cpp\
+		Window.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -37,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(DIROBJS)
 	@printf 'Compiling %s : [\033[32mDONE\033[0m]\n' '$(NAME)'
-	@$(CC) $(CFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) -o $@ $^ -lncurses
 
 $(DIROBJ)%.o: $(DIRSRC)%.cpp
 	@printf 'Compiling %s: [\033[32mDONE\033[0m]\n' '$^'
