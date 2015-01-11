@@ -5,12 +5,12 @@ int					main(void) {
 
 	AShip			* player = new Player();
 	CObject			* list   = new CObject(player);
-	Map				* map    = new Map(40, 40, list);
+	Map				* map    = new Map(80, 50, list);
 
 	Window			* win 	 = new Window(map);
 
 	player->setMap(map);
-	player->move(19, 39);
+	player->move(39, 49);
 	player->setHp(3);
 
 	win->menu();

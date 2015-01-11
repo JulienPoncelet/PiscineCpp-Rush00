@@ -165,7 +165,7 @@ void Window::_playGame(void) {
 	this->_displayGame();
 
 	clock_t				start;
-	int 				randomEnemy = 3;
+	int 				randomEnemy = 2;
 	int 				input;
 	clock_t				now;
 	AObject				* player = this->_map->getList()->getFirst()->getObj();
@@ -174,7 +174,7 @@ void Window::_playGame(void) {
 		wtimeout(this->_gameWin, 10);
 		start = clock();
 
-		if (randomEnemy++ == 5) {
+		if (randomEnemy++ == 2) {
 			this->_map->addRandomEnemy();
 			randomEnemy = 0;
 		}
