@@ -130,9 +130,9 @@ void Window::_displayGame(int cd) {
 	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 7, "LIFE : ");
 	obj[0] = 'o';
 	while (hp) {
-		wattron(this->_gameWin, COLOR_PAIR(RED));
+		wattron(this->_gameWin, COLOR_PAIR(MAGENTA));
 		mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp , obj);
-		wattroff(this->_gameWin, COLOR_PAIR(RED));
+		wattroff(this->_gameWin, COLOR_PAIR(MAGENTA));
 
 		hp--;
 	}
