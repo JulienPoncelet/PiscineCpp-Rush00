@@ -11,7 +11,7 @@ Projectile::Projectile(void) : AObject() {
 }
 
 Projectile::Projectile(uint x, uint y, plan_e z, Map * map, direction_e dir, uint dmg)
-						: AObject(x, y, z, map) {
+						: AObject(x, y, z, 1, map) {
 	setIndex(_amount++);
 	setDir(dir);
 	setDmg(dmg);

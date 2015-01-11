@@ -1,15 +1,13 @@
 #include <ft_retro.hpp>
 
 AShip::AShip(void) : AObject() {
-	setHp(1);
 	setMaxHp(1);
 	setDmg(1);
 	return ;
 }
 
 AShip::AShip(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
-				: AObject(x, y, z, map) {
-	setHp(hp);
+				: AObject(x, y, z, hp, map) {
 	setMaxHp(max_hp);
 	setDmg(dmg);
 	return ;
@@ -54,21 +52,12 @@ std::string 				AShip::toString(void) const {
 	return out.str();
 }
 
-uint			AShip::getHp(void) const {
-	return _hp;
-}
-
 uint			AShip::getMaxHp(void) const {
 	return _maxHp;
 }
 
 uint			AShip::getDmg(void) const {
 	return _dmg;
-}
-
-void			AShip::setHp(uint hp) {
-	_hp = hp;
-	return ;
 }
 
 void			AShip::setMaxHp(uint maxHp) {

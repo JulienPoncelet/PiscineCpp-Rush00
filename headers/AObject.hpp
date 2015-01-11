@@ -8,7 +8,7 @@ class AObject {
 public:
 
 	AObject(void);
-	AObject(uint x, uint y, plan_e z, Map * map);
+	AObject(uint x, uint y, plan_e z, uint hp, Map * map);
 	AObject(AObject const & src);
 	virtual ~AObject(void);
 
@@ -24,12 +24,14 @@ public:
 	uint					getX(void) const;
 	uint					getY(void) const;
 	plan_e					getZ(void) const;
+	uint					getHp(void) const;
 	Map 					* getMap(void) const;	
 
 	void					setIndex(uint index);
 	void					setType(objType_e type);
 	void					setX(uint x);
 	void					setY(uint y);
+	void					setHp(uint hp);
 	void					setMap(Map * map);
 
 protected:
@@ -39,6 +41,7 @@ protected:
 	uint					_x;
 	uint					_y;
 	plan_e const			_z;
+	uint					_hp;
 	Map						* _map;
 
 };

@@ -17,17 +17,14 @@ public:
 	virtual void			shoot(void) const = 0;
 	virtual std::string		toString(void) const;
 
-	uint					getHp(void) const;
 	uint					getMaxHp(void) const;
 	uint					getDmg(void) const;
 
-	void					setHp(uint hp);
 	void					setMaxHp(uint maxHp);
 	void					setDmg(uint dmg);
 
 protected:
 
-	uint					_hp;
 	uint					_maxHp;
 	uint					_dmg;
 

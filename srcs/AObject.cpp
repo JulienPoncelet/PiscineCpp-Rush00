@@ -3,13 +3,15 @@
 AObject::AObject(void) : _z(MIDDLEGROUND) {
 	setX(0);
 	setY(0);
+	setHp(1);
 	setMap(NULL);
 	return ;
 }
 
-AObject::AObject(uint x, uint y, plan_e z, Map * map) : _z(z) {
+AObject::AObject(uint x, uint y, plan_e z, uint hp, Map * map) : _z(z) {
 	setX(x);
 	setY(y);
+	setHp(hp);
 	setMap(map);
 	return ;
 }
@@ -79,6 +81,10 @@ plan_e				AObject::getZ(void) const {
 	return _z;
 }
 
+uint				AObject::getHp(void) const {
+	return _hp;
+}
+
 Map 				* AObject::getMap(void) const {
 	return _map;
 }
@@ -100,6 +106,11 @@ void				AObject::setX(uint x) {
 
 void				AObject::setY(uint y) {
 	_y = y;
+	return ;
+}
+
+void				AObject::setHp(uint hp) {
+	_hp = hp;
 	return ;
 }
 
