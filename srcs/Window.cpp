@@ -11,8 +11,18 @@ Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2) {
 	noecho();
 	curs_set(0);
 	getmaxyx(stdscr,this->_row,this->_col);
-	mvprintw(0, 0, "Use arrow keys to go up and down, Press enter to select a choice");
-	refresh();
+}
+
+Window::Window(Map * map) : _choice(0), _highlight(1), _menuChoices(2), _map(map) {
+	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
+	this->_choices[0] = "Play";
+	this->_choices[1] = "Exit";
+	initscr();
+	clear();
+	cbreak();
+	noecho();
+	curs_set(0);
+	getmaxyx(stdscr,this->_row,this->_col);
 }
 
 Window::Window(Window const & window) : _menuChoices(2){
@@ -40,6 +50,7 @@ std::string const Window::string(void) const {
 }
 
 void Window::menu(void) {
+	clear();
 	this->_menuWin = newwin(10, 30, this->_row/2-5, this->_col/2-15);
 	keypad(this->_menuWin, TRUE);
 	int ch;
@@ -63,7 +74,8 @@ void Window::menu(void) {
 		} else if (ch == 10) {
 			this->_choice = this->_highlight;
 			if (this->_choice == 1) {
-				std::cerr << "playgame" << std::endl;
+				wclear(this->_menuWin);
+				wrefresh(this->_menuWin);
 				this->_playGame();
 			}else if (this->_choice == 2) {
 				break;
@@ -97,49 +109,57 @@ void Window::_displayMenu(void) {
 	wrefresh(this->_menuWin);
 }
 
-void Window::_displayGame(int x, int y) {
+void Window::_displayGame() {
+	wclear(this->_gameWin);
 	box(this->_gameWin, 0, 0);
 
-	mvwprintw(this->_gameWin, y-1, x, " ");
-	mvwprintw(this->_gameWin, y+1, x, " ");
-	mvwprintw(this->_gameWin, y, x-1, " ");
-	mvwprintw(this->_gameWin, y, x+1, " ");
-	wattron(this->_gameWin, A_REVERSE | A_BOLD);
-	mvwprintw(this->_gameWin, y, x, "@");
-	wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+	CObject *list = this->_map->getList()->getFirst();
+
+	while (list) {
+		if (list->getObj()->getType() == PLAYER){
+			wattron(this->_gameWin, A_REVERSE | A_BOLD);
+			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "@");
+			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+		} else if (list->getObj()->getType() == ENEMY){
+			wattron(this->_gameWin, A_REVERSE | A_BOLD);
+			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "#");
+			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+		} else if (list->getObj()->getType() == PROJECTILE){
+			wattron(this->_gameWin, A_REVERSE | A_BOLD);
+			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "|");
+			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+		}
+		list = list->getNext();
+	}
 
 	wrefresh(this->_gameWin);
 }
 
 void Window::_playGame(void) {
-	this->_gameWin = newwin(this->_row, this->_col, 0, 0);
-	int ch;
-	int x, y;
-	keypad(this->_gameWin, TRUE);
-	x = this->_col / 2;
-	y = this->_row / 2;
 	clear();
-	halfdelay(255);
-	this->_displayGame(x, y);
+	this->_gameWin = newwin(this->_map->getMaxY() + 2, this->_map->getMaxX() + 2, 0, 0);
+	int ch;
+	int y;
+	keypad(this->_gameWin, TRUE);
+	AObject *player = this->_map->getList()->getFirst()->getObj();
+	halfdelay(1);
+	this->_displayGame();
 	while (42){
 		ch = wgetch(this->_gameWin);
-		if (ch == KEY_UP){
-			y--;
-		}else if (ch == KEY_DOWN){
-			y++;
-		}else if (ch == KEY_LEFT){
-			x--;
+		if (ch == KEY_LEFT){
+			y = ((int)(player->getX() - 1) >= 0 ? player->getX() - 1 : 0);
+			player->move(y, player->getY());
 		}else if (ch == KEY_RIGHT){
-			x++;
+			player->move(player->getX() + 1,player->getY());
+		}else if (ch == ' '){
+			player->shoot();
 		}else if (ch == 'e') {
-			wborder(this->_gameWin, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+			wclear(this->_gameWin);
 			wrefresh(this->_gameWin);
 			delwin(this->_gameWin);
-			nocbreak();
-			cbreak();
 			return;
 		}
-		this->_displayGame(x, y);
+		this->_displayGame();
 	}
 }
 

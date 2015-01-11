@@ -15,6 +15,7 @@ Projectile::Projectile(uint x, uint y, plan_e z, Map * map, direction_e dir, uin
 	setIndex(_amount++);
 	setDir(dir);
 	setDmg(dmg);
+	setType(PROJECTILE);
 	return ;
 }
 
@@ -54,6 +55,10 @@ std::string 				Projectile::toString(void) const {
 	out << "\tDamage: " << getDmg() << std::endl;
 	out << "\033[0m";
 	return out.str();
+}
+
+void						Projectile::shoot(void) const {
+	return ;
 }
 
 direction_e					Projectile::getDir(void) const {

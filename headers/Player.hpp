@@ -14,6 +14,7 @@ public:
 
 	Player 					& operator=(Player const & src);
 
+	virtual void			move(uint x, uint y);
 	virtual void			shoot(void) const;
 	virtual void			destroy(void);
 	virtual std::string		toString(void) const;

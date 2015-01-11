@@ -11,6 +11,7 @@ Enemy::Enemy(void) : AObject(), AShip() {
 Enemy::Enemy(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
 				: AObject(x, y, z, map), AShip(x, y, z, map, hp, max_hp, dmg) {
 	setIndex(_amount++);
+	setType(ENEMY);
 	return ;
 }
 

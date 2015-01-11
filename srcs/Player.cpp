@@ -11,6 +11,7 @@ Player::Player(void) : AObject(), AShip() {
 Player::Player(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
 				: AObject(x, y, z, map), AShip(x, y, z, map, hp, max_hp, dmg) {
 	setIndex(_amount++);
+	setType(PLAYER);
 	return ;
 }
 
@@ -51,6 +52,16 @@ std::string 				Player::toString(void) const {
 	out << "\tDamage: " << getDmg() << std::endl;
 	out << "\033[0m";
 	return out.str();
+}
+
+void						Player::move(uint x, uint y) {
+	if (x < getMap()->getMaxX()){
+		setX(x);
+	}
+	if (y < getMap()->getMaxY()){
+		setY(y);
+	}
+	return ;
 }
 
 void						Player::shoot(void) const {

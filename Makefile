@@ -13,7 +13,7 @@
 NAME = ft_retro
 
 DIRSRC = ./srcs/
-DIROBJ = ./obj/
+DIROBJ = ./.obj/
 
 SRC = 	main.cpp\
 		Map.cpp\
@@ -42,7 +42,7 @@ $(NAME): $(DIROBJS)
 
 $(DIROBJ)%.o: $(DIRSRC)%.cpp
 	@printf 'Compiling %s: [\033[32mDONE\033[0m]\n' '$^'
-	@mkdir -p obj
+	@mkdir -p $(DIROBJ)
 	@$(CC) $(CFLAGS) -c $^ -I $(HEADERS) -o $@
 
 clean:
@@ -54,5 +54,8 @@ fclean: clean
 	@printf 'Fclean %s : [\033[32mDONE\033[0m]\n' '$(NAME)'
 
 re : fclean all
+
+exec: re
+	./$(NAME)
 
 .PHONY: all clean fclean re

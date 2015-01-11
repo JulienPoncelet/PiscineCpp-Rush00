@@ -1,6 +1,8 @@
 #ifndef WINDOW_CLASS
 # define WINDOW_CLASS
 
+# include <ft_retro.hpp>
+
 class Window
 {
 private:
@@ -12,16 +14,19 @@ private:
 	int				_col;
 	int const		_menuChoices;
 	std::string  	_choices[2];
+	Map				*_map;
+
 
 
 	void _displayMenu(void);
-	void _displayGame(int x, int y);
+	void _displayGame(void);
 	void _playGame(void);
 
 public:
 
 	// constructor/destructor
 	Window();
+	Window(Map * map);
 	Window(Window const & window);
 	virtual ~Window();
 

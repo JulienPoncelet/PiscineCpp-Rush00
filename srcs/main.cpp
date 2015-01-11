@@ -5,15 +5,15 @@ int					main(void) {
 	CObject			* list   = new CObject(player);
 	Map				* map    = new Map(20, 40, list);
 
-	player->move(9, 19);
-	player->setMap(map);
+	Window			win (map);
 
+	player->setMap(map);
+	player->move(5, 29);
+	
 	AShip	 		* enemy = new Enemy(0, 19, MIDDLEGROUND, map, 1, 1, 1);
 	map->pushObject(enemy);
 
-	player->shoot();
-	std::cout << *list << std::endl;
-
+	win.menu();
 
 	return 0;
 }
