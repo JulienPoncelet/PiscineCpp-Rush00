@@ -125,14 +125,15 @@ void Window::_displayGame() {
 	box(this->_gameWin, 0, 0);
 
 	CObject *list = this->_map->getList()->getFirst();
-	hp = list->getObj()->getHp();
-
+	hp = 3;//list->getObj()->getHp();
+	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 6, "life: ");
 	while (hp) {
-		wattron(this->_gameWin, A_REVERSE | COLOR_PAIR(RED));
-		mvwprintw(this->_gameWin, list->getObj()->getY() + 1, this->_map->getMaxX() - hp , " ");
-		wattroff(this->_gameWin, A_REVERSE | COLOR_PAIR(RED));
+		obj[0] = '#';
+		wattron(this->_gameWin, COLOR_PAIR(RED));
+		mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp , obj);
+		wattroff(this->_gameWin, COLOR_PAIR(RED));
 
-		h--;
+		hp--;
 	}
 
 	while (list) {
@@ -141,7 +142,7 @@ void Window::_displayGame() {
 			color = A_REVERSE | A_BOLD | COLOR_PAIR(GREEN);
 		} else if (list->getObj()->getType() == ENEMY){
 			obj[0] = 'V';
-			color = COLOR_PAIR(RED);
+			color = COLOR_PAIR(BLUE);
 		} else if (list->getObj()->getType() == PROJECTILE){
 			obj[0] = '|';
 			color = COLOR_PAIR(YELLOW);
