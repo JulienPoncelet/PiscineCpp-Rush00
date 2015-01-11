@@ -14,7 +14,7 @@ public:
 
 	AObject 				& operator=(AObject const & src);
 
-	void					move(uint x, uint y);
+	virtual void			move(uint x, uint y);
 	virtual std::string		toString(void) const;
 	
 	uint					getIndex(void) const;
