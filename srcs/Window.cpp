@@ -24,6 +24,8 @@ Window::~Window(void) {
 	clrtoeol();
 	refresh();
 	endwin();
+	if (this->_map->getMaxY() > this->_row or this->_map->getMaxX() > this->_col)
+		std::cout << "Not enough space to display." << std::endl;
 }
 
 // members functions
@@ -35,7 +37,11 @@ std::string const Window::string(void) const {
 	std::string	res (out.str());
 	return res;
 }
-
+bool Window::_checkWindow(void) {
+	if (this->_map->getMaxY() > this->_row or this->_map->getMaxX() > this->_col)
+		return false;
+	return true;
+}
 void Window::_initNcurses(void) {
 	initscr();
 	clear();
@@ -53,6 +59,8 @@ void Window::_initNcurses(void) {
 }
 
 void Window::menu(void) {
+	if (not this->_checkWindow())
+		return;
 	this->_menuWin = newwin(10, 30, this->_row/2-5, this->_col/2-15);
 	keypad(this->_menuWin, TRUE);
 	int ch;
