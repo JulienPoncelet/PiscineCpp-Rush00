@@ -46,7 +46,7 @@ std::string 				AShip::toString(void) const {
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;
-	// out << "\tMap ptr: " << getMap() << std::endl;
+	out << "\tMap ptr: " << getMap() << std::endl;
 	out << "\tHP: " << getHp() << std::endl;
 	out << "\tMax HP: " << getMaxHp() << std::endl;
 	out << "\tDamage: " << getDmg() << std::endl;

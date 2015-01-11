@@ -44,7 +44,7 @@ std::string 				Projectile::toString(void) const {
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;
-	// out << "\tMap ptr: " << getMap() << std::endl;
+	out << "\tMap ptr: " << getMap() << std::endl;
 	out << "\tDirection: " << getDir() << std::endl;
 	out << "\tDamage: " << getDmg() << std::endl;
 	out << "\033[0m";
