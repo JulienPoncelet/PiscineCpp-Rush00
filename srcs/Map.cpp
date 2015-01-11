@@ -4,6 +4,7 @@ Map::Map(void) {
 	setMaxX(20);
 	setMaxY(40);
 	setList(NULL);
+	setEnd(false);
 	return ;
 }
 
@@ -11,6 +12,7 @@ Map::Map(uint maxX, uint maxY, CObject * newList) {
 	setMaxX(maxX);
 	setMaxY(maxY);
 	setList(newList);
+	setEnd(false);
 	return ;
 }
 
@@ -55,19 +57,47 @@ void						Map::addRandomEnemy(void) {
 	return ;
 }
 
-
-void						Map::moveAll(void) {
+void						Map::moveEnemy(void) {
 	CObject					* current = getList();
 	AObject 				* current_obj;
+	uint					x;
+	uint					y;
 
 	while (current) {
 		current_obj = current->getObj();
-		if (current_obj->getType() == ENEMY)
-			current_obj->move(current_obj->getX(), current_obj->getY() + 1);
-		else if (current_obj->getType() == PROJECTILE)
-			current_obj->move(current_obj->getX(), current_obj->getY() - 1);
+		if (current_obj->getType() == ENEMY) {
+			x = current_obj->getX();
+			y = current_obj->getY();
+			if (y == getMaxY() - 1)
+				current_obj->destroy();
+			else
+				current_obj->move(x, y + 1);
+		}
 		current = current->getNext();
 	}
+	checkColision();
+	return ;
+}
+
+void						Map::moveProjectile(void) {
+	CObject					* current = getList();
+	AObject 				* current_obj;
+	uint					x;
+	uint					y;	
+
+	while (current) {
+		current_obj = current->getObj();
+		if (current_obj->getType() == PROJECTILE) {
+			x = current_obj->getX();
+			y = current_obj->getY();
+			if (y == 0)
+				current_obj->destroy();
+			else
+				current_obj->move(x, y - 1);
+		}
+		current = current->getNext();
+	}
+	checkColision();
 	return ;
 }
 
@@ -85,8 +115,8 @@ void						Map::checkColision(void) {
 			slave_obj = slave->getObj();
 
 			if (master_obj->getX() == slave_obj->getX() and master_obj->getY() == slave_obj->getY()) {
-				getList()->removeObject(slave_obj);
-				getList()->removeObject(master_obj);
+				master_obj->destroy();				
+				slave_obj->destroy();				
 				checkColision();
 				return ;
 			}		
@@ -97,6 +127,12 @@ void						Map::checkColision(void) {
 	}
 	return ;
 }
+
+void						Map::endGame(void) {
+	setEnd(true);
+	return ;
+}
+
 
 void						Map::pushObject(AObject * newObject) {
 	getList()->addObject(newObject);	
@@ -120,6 +156,10 @@ CObject						* Map::getList(void) const {
 	return _list;
 }
 
+bool						Map::getEnd(void) const {
+	return _end;
+}
+
 void						Map::setMaxX(uint maxX) {
 	_maxX = maxX;
 	return ;
@@ -132,4 +172,10 @@ void						Map::setMaxY(uint maxY) {
 
 void						Map::setList(CObject * newList) {
 	_list = newList;
+	return ;
+}
+
+void						Map::setEnd(bool end) {
+	_end = end;
+	return ;
 }

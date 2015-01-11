@@ -55,13 +55,6 @@ std::string 				Enemy::toString(void) const {
 }
 
 void			Enemy::shoot(void) const {
-	// Item 		* projectile =  Projectile(DOWN, getDmg(), getX(), getY() + 1);
-
-	// getMap().pushItem(projectile);
-	return ;
-}
-
-void			Enemy::destroy(void) {
-	// getMap().popItem(this);
+	// BONUS
 	return ;
 }

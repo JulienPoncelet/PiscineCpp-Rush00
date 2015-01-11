@@ -149,7 +149,9 @@ void Window::_playGame(void) {
 	int 				y;
 	clock_t				now;
 	AObject				* player = this->_map->getList()->getFirst()->getObj();
-	while (42){
+	int 				wait;
+
+	while (not this->_map->getEnd()){
 		start = clock();
 
 		if (randomEnemy++ == 5) {
@@ -170,21 +172,22 @@ void Window::_playGame(void) {
 		else if (input == ' ')
 			player->shoot();
 
-		else if (input == 'e') {
-			wclear(this->_gameWin);
-			wrefresh(this->_gameWin);
-			delwin(this->_gameWin);
-			return;
-		}
+		else if (input == 'e')
+			this->_map->endGame();
 		
-		this->_map->moveAll();
 		this->_map->checkColision();
+		this->_map->moveEnemy();
+		this->_map->moveProjectile();
+
 		now = clock();
-		int wait = (CLOCKS_PER_SEC / 12) - ( now - start );
+		wait = (CLOCKS_PER_SEC / 12) - ( now - start );
 		usleep(wait);
 
 		this->_displayGame();
 	}
+	wclear(this->_gameWin);
+	wrefresh(this->_gameWin);
+	delwin(this->_gameWin);	
 }
 
 //operators overload

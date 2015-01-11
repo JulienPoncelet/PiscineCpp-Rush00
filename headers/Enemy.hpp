@@ -15,7 +15,6 @@ public:
 	Enemy 					& operator=(Enemy const & src);
 
 	virtual void			shoot(void) const;
-	virtual void			destroy(void);
 	virtual std::string		toString(void) const;
 
 private:

@@ -111,17 +111,18 @@ void					CObject::removeLast(CObject * last) {
 }
 
 void					CObject::removeAll(void) {
-	CObject 			* current = getFirst();
-	CObject 			* deleteMe = getFirst();
+	CObject 			* current = this;
+	CObject 			* deleteMe;
 
-	while (current->getNext() != NULL) {
+	while (current) {
 		deleteMe = current;
+
 		current = current->getNext();
+
 		delete deleteMe->getObj();
-		delete deleteMe;
+		delete deleteMe;		
 	}
-	delete current->getObj();
-	delete current;
+
 	return ;
 }
 

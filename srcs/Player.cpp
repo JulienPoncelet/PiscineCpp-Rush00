@@ -73,7 +73,6 @@ void						Player::shoot(void) const {
 }
 
 void						Player::destroy(void) {
-	// getMap().popItem(this);
-	// FINISH GAME
+	getMap()->endGame();
 	return ;
 }

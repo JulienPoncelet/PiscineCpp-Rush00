@@ -15,7 +15,6 @@ public:
 	AShip 					& operator=(AShip const & src);
 
 	virtual void			shoot(void) const = 0;
-	virtual void			destroy(void) = 0;
 	virtual std::string		toString(void) const;
 
 	uint					getHp(void) const;
