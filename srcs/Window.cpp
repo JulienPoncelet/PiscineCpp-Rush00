@@ -119,11 +119,21 @@ void Window::_displayMenu(void) {
 void Window::_displayGame() {
 	uint 		color;
 	char 		obj[2] = " ";
+	uint		hp;
 
 	wclear(this->_gameWin);
 	box(this->_gameWin, 0, 0);
 
 	CObject *list = this->_map->getList()->getFirst();
+	hp = list->getObj()->getHp();
+
+	while (hp) {
+		wattron(this->_gameWin, A_REVERSE | COLOR_PAIR(RED));
+		mvwprintw(this->_gameWin, list->getObj()->getY() + 1, this->_map->getMaxX() - hp , " ");
+		wattroff(this->_gameWin, A_REVERSE | COLOR_PAIR(RED));
+
+		h--;
+	}
 
 	while (list) {
 		if (list->getObj()->getType() == PLAYER){
