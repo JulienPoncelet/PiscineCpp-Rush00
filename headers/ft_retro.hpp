@@ -8,6 +8,8 @@
 # include <ctime>
 # include <stdlib.h>
 
+# define FRAME_RATE 24
+
 typedef unsigned int uint;
 
 enum plan_e {

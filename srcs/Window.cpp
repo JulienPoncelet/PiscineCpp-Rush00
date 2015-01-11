@@ -127,10 +127,10 @@ void Window::_displayGame() {
 
 	while (list) {
 		if (list->getObj()->getType() == PLAYER){
-			obj[0] = '@';
+			obj[0] = ' ';
 			color = A_REVERSE | A_BOLD | COLOR_PAIR(GREEN);
 		} else if (list->getObj()->getType() == ENEMY){
-			obj[0] = '#';
+			obj[0] = 'V';
 			color = COLOR_PAIR(RED);
 		} else if (list->getObj()->getType() == PROJECTILE){
 			obj[0] = '|';
@@ -151,17 +151,16 @@ void Window::_playGame(void) {
 	clear();
 	this->_gameWin = newwin(this->_map->getMaxY() + 2, this->_map->getMaxX() + 2, 0, 0);
 	keypad(this->_gameWin, TRUE);
-	halfdelay(1);
 	this->_displayGame();
 
 	clock_t				start;
-	int 				randomEnemy = 5;
+	int 				randomEnemy = 3;
 	int 				input;
 	clock_t				now;
 	AObject				* player = this->_map->getList()->getFirst()->getObj();
-	int 				wait;
 
 	while (not this->_map->getEnd()){
+		wtimeout(this->_gameWin, 10);
 		start = clock();
 
 		if (randomEnemy++ == 5) {
@@ -188,9 +187,9 @@ void Window::_playGame(void) {
 		this->_map->moveProjectile();
 
 		now = clock();
-		wait = (CLOCKS_PER_SEC / 12) - ( now - start );
-		usleep(wait);
+		wrefresh(this->_gameWin);
 
+		usleep(CLOCKS_PER_SEC/FRAME_RATE - (now - start));
 		this->_displayGame();
 	}
 	wclear(this->_gameWin);
