@@ -52,6 +52,16 @@ std::string 				Player::toString(void) const {
 	return out.str();
 }
 
+void						Player::move(uint x, uint y) {
+	if (x < getMap()->getMaxX()){
+		setX(x);
+	}
+	if (y < getMap()->getMaxY()){
+		setY(y);
+	}
+	return ;
+}
+
 void			Player::shoot(void) const {
 	// Item 		* projectile =  Projectile(UP, getDmg(), getX(), getY() - 1);
 
