@@ -7,16 +7,8 @@ class AObject {
 
 public:
 
-	enum plan_e {
-		BACKGROUND = 1, MIDDLEGROUND, FOREGROUND
-	};
-
-	enum direction_e {
-		UP = 1, RIGHT, DOWN, LEFT 
-	};
-
 	AObject(void);
-	AObject(uint x, uint y, plan_e z);
+	AObject(uint x, uint y, plan_e z, Map * map);
 	AObject(AObject const & src);
 	virtual ~AObject(void);
 

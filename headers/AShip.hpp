@@ -8,7 +8,7 @@ class AShip : public virtual AObject {
 public:
 
 	AShip(void);
-	AShip(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg);
+	AShip(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg);
 	AShip(AShip const & src);
 	virtual ~AShip(void);
 

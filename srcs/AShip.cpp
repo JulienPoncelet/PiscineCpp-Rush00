@@ -7,7 +7,8 @@ AShip::AShip(void) : AObject() {
 	return ;
 }
 
-AShip::AShip(uint x, uint y, AObject::plan_e z, uint hp, uint max_hp, uint dmg) : AObject(x, y, z) {
+AShip::AShip(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
+				: AObject(x, y, z, map) {
 	setHp(hp);
 	setMaxHp(max_hp);
 	setDmg(dmg);
@@ -45,7 +46,7 @@ std::string 				AShip::toString(void) const {
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;
-	// out << "\tMap ptr: " << getMap() << std::endl;
+	out << "\tMap ptr: " << getMap() << std::endl;
 	out << "\tHP: " << getHp() << std::endl;
 	out << "\tMax HP: " << getMaxHp() << std::endl;
 	out << "\tDamage: " << getDmg() << std::endl;
