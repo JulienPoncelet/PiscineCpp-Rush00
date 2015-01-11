@@ -48,8 +48,8 @@ void Window::_initNcurses(void) {
 	curs_set(0);
 	getmaxyx(stdscr,this->_row,this->_col);
 	start_color();
-	init_pair(RED, COLOR_RED, COLOR_BLACK);
-	init_pair(BLUE, COLOR_BLUE, COLOR_BLACK);
+	init_pair(RED, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(BLUE, COLOR_CYAN, COLOR_BLACK);
 	init_pair(GREEN, COLOR_GREEN, COLOR_BLACK);
 	init_pair(WHITE, COLOR_WHITE, COLOR_BLACK);
 	init_pair(YELLOW, COLOR_YELLOW, COLOR_BLACK);
@@ -125,10 +125,10 @@ void Window::_displayGame() {
 	box(this->_gameWin, 0, 0);
 
 	CObject *list = this->_map->getList()->getFirst();
-	hp = 3;//list->getObj()->getHp();
+	hp = list->getObj()->getHp();
 	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 6, "life: ");
+	obj[0] = 'o';
 	while (hp) {
-		obj[0] = '#';
 		wattron(this->_gameWin, COLOR_PAIR(RED));
 		mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp , obj);
 		wattroff(this->_gameWin, COLOR_PAIR(RED));

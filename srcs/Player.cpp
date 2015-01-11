@@ -73,6 +73,9 @@ void						Player::shoot(void) const {
 }
 
 void						Player::destroy(void) {
-	getMap()->endGame();
+	setHp(getHp()-1);
+	if (getHp() <= 0){
+		getMap()->endGame();	
+	}
 	return ;
 }

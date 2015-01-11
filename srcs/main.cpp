@@ -11,6 +11,7 @@ int					main(void) {
 
 	player->setMap(map);
 	player->move(19, 39);
+	player->setHp(3);
 
 	win.menu();
 
