@@ -10,8 +10,8 @@ private:
 	WINDOW 			*_gameWin;
 	int				_choice;
 	int				_highlight;
-	int				_row; 
-	int				_col;
+	uint				_row; 
+	uint				_col;
 	int const		_menuChoices;
 	std::string  	_choices[2];
 	Map				*_map;
@@ -23,6 +23,7 @@ private:
 	void _displayGame(void);
 	void _playGame(void);
 	void _initNcurses(void);
+	bool _checkWindow(void);
 
 public:
 
