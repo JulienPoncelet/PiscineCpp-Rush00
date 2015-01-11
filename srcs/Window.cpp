@@ -44,7 +44,8 @@ void Window::_initNcurses(void) {
 	curs_set(0);
 	getmaxyx(stdscr,this->_row,this->_col);
 	start_color();
-	init_pair(RED, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(RED, COLOR_RED, COLOR_BLACK);
+	init_pair(MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(BLUE, COLOR_CYAN, COLOR_BLACK);
 	init_pair(GREEN, COLOR_GREEN, COLOR_BLACK);
 	init_pair(WHITE, COLOR_WHITE, COLOR_BLACK);
@@ -112,7 +113,7 @@ void Window::_displayMenu(void) {
 	wrefresh(this->_menuWin);
 }
 
-void Window::_displayGame() {
+void Window::_displayGame(int cd) {
 	uint 		color;
 	char 		obj[2] = " ";
 	uint		hp;
@@ -129,9 +130,9 @@ void Window::_displayGame() {
 	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 7, "LIFE : ");
 	obj[0] = 'o';
 	while (hp) {
-		wattron(this->_gameWin, COLOR_PAIR(RED));
+		wattron(this->_gameWin, COLOR_PAIR(MAGENTA));
 		mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp , obj);
-		wattroff(this->_gameWin, COLOR_PAIR(RED));
+		wattroff(this->_gameWin, COLOR_PAIR(MAGENTA));
 
 		hp--;
 	}
@@ -139,7 +140,10 @@ void Window::_displayGame() {
 	while (list) {
 		if (list->getObj()->getType() == PLAYER){
 			obj[0] = ' ';
-			color = A_REVERSE | A_BOLD | COLOR_PAIR(GREEN);
+			if (cd >= 10)
+				color = A_REVERSE | A_BOLD | COLOR_PAIR(GREEN);
+			else
+				color = A_REVERSE | A_BOLD | COLOR_PAIR(RED);
 		} else if (list->getObj()->getType() == ENEMY){
 			obj[0] = 'V';
 			color = COLOR_PAIR(BLUE);
@@ -162,13 +166,14 @@ void Window::_playGame(void) {
 	clear();
 	this->_gameWin = newwin(this->_map->getMaxY() + 2, this->_map->getMaxX() + 2, 0, 0);
 	keypad(this->_gameWin, TRUE);
-	this->_displayGame();
+	this->_displayGame(10);
 
 	clock_t				start;
 	int 				randomEnemy = 2;
 	int 				input;
 	clock_t				now;
 	AObject				* player = this->_map->getList()->getFirst()->getObj();
+	int 				cd = 10;
 
 	while (not this->_map->getEnd()){
 		wtimeout(this->_gameWin, 10);
@@ -187,8 +192,10 @@ void Window::_playGame(void) {
 		else if (input == KEY_RIGHT)
 			player->move(player->getX() + 1,player->getY());
 
-		else if (input == ' ')
+		else if (input == ' ' and cd >= 10) {
+			cd = 0;
 			player->shoot();
+		}
 
 		else if (input == 'e')
 			this->_map->endGame();
@@ -202,7 +209,8 @@ void Window::_playGame(void) {
 		wrefresh(this->_gameWin);
 
 		usleep(CLOCKS_PER_SEC/FRAME_RATE - (now - start));
-		this->_displayGame();
+		this->_displayGame(cd);
+		cd++;
 	}
 	wclear(this->_gameWin);
 	wrefresh(this->_gameWin);

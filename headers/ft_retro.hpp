@@ -24,7 +24,7 @@ enum objType_e {
 	PLAYER = 1, ENEMY, PROJECTILE 
 };
 enum color_e {
-	RED = 1, BLUE, GREEN, WHITE, YELLOW
+	RED = 1, BLUE, GREEN, WHITE, YELLOW, MAGENTA
 };
 
 class Map;
