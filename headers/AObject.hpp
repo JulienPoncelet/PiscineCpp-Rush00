@@ -18,12 +18,14 @@ public:
 	virtual std::string		toString(void) const;
 	
 	uint					getIndex(void) const;
+	objType_e				getType(void) const;
 	uint					getX(void) const;
 	uint					getY(void) const;
 	plan_e					getZ(void) const;
 	Map 					* getMap(void) const;	
 
 	void					setIndex(uint index);
+	void					setType(objType_e type);
 	void					setX(uint x);
 	void					setY(uint y);
 	void					setMap(Map * map);
@@ -31,6 +33,7 @@ public:
 protected:
 
 	uint					_index;
+	objType_e				_type;
 	uint					_x;
 	uint					_y;
 	plan_e const			_z;

@@ -4,6 +4,7 @@ uint						Player::_amount = 0;
 
 Player::Player(void) : AObject(), AShip() {
 	setIndex(_amount++);
+	setType(PLAYER);
 	return ;
 }
 
@@ -64,12 +65,15 @@ void						Player::move(uint x, uint y) {
 
 void			Player::shoot(void) const {
 	// Item 		* projectile =  Projectile(UP, getDmg(), getX(), getY() - 1);
+void						Player::shoot(void) const {
+	AObject 				* projectile = new Projectile(getX(), getY() - 1, getZ(), getMap(), UP, getDmg());
 
-	// getMap().pushItem(projectile);
+	projectile->getMap()->pushObject(projectile);
+
 	return ;
 }
 
-void			Player::destroy(void) {
+void						Player::destroy(void) {
 	// getMap().popItem(this);
 	// FINISH GAME
 	return ;

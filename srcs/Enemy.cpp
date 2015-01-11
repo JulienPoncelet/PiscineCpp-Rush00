@@ -4,6 +4,7 @@ uint						Enemy::_amount = 0;
 
 Enemy::Enemy(void) : AObject(), AShip() {
 	setIndex(_amount++);
+	setType(ENEMY);
 	return ;
 }
 

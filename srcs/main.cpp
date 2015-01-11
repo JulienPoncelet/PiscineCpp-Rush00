@@ -10,13 +10,12 @@ int					main(void) {
 	player->setMap(map);
 	player->move(5, 29);
 
-	AObject 		* enemy = new Enemy(5, 0, MIDDLEGROUND, map, 1, 1, 1);
+	AShip	 		* enemy = new Enemy(0, 19, MIDDLEGROUND, map, 1, 1, 1);
 	map->pushObject(enemy);
 
-	// std::cout << *list << std::endl;
-	// std::cout << *map << std::endl;
+	player->shoot();
+	std::cout << *list << std::endl;
 
-	win.menu();
 
 	return 0;
 }

@@ -1,6 +1,10 @@
 #include <ft_retro.hpp>
 
+uint						Projectile::_amount = 0;
+
 Projectile::Projectile(void) : AObject() {
+	setIndex(_amount++);
+	setType(PROJECTILE);
 	setDir(UP);
 	setDmg(1);
 	return ;
@@ -8,6 +12,7 @@ Projectile::Projectile(void) : AObject() {
 
 Projectile::Projectile(uint x, uint y, plan_e z, Map * map, direction_e dir, uint dmg)
 						: AObject(x, y, z, map) {
+	setIndex(_amount++);
 	setDir(dir);
 	setDmg(dmg);
 	return ;
@@ -40,7 +45,7 @@ std::string 				Projectile::toString(void) const {
 	std::ostringstream 		out;
 
 	out << "\033[36m";
-	out << "Projectile:" << std::endl;
+	out << "Projectile #" << getIndex() << std::endl;
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;

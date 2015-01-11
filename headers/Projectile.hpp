@@ -26,6 +26,7 @@ private:
 
 	direction_e				_dir;
 	uint					_dmg;
+	static uint				_amount;
 
 };
 
