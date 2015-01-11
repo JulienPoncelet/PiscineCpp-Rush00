@@ -47,8 +47,54 @@ std::string 				Map::toString(void) const {
 	return out.str();
 }
 
-void						Map::display(void) const {
-	std::cout << "Je display" << std::endl;
+void						Map::addRandomEnemy(void) {
+	int						randomX = rand() % getMaxX();
+	Enemy 					* enemy = new Enemy(randomX, 0, MIDDLEGROUND, this, 1, 1, 1);
+
+	getList()->addObject(enemy);
+	return ;
+}
+
+
+void						Map::moveAll(void) {
+	CObject					* current = getList();
+	AObject 				* current_obj;
+
+	while (current) {
+		current_obj = current->getObj();
+		if (current_obj->getType() == ENEMY)
+			current_obj->move(current_obj->getX(), current_obj->getY() + 1);
+		else if (current_obj->getType() == PROJECTILE)
+			current_obj->move(current_obj->getX(), current_obj->getY() - 1);
+		current = current->getNext();
+	}
+	return ;
+}
+
+void						Map::checkColision(void) {
+	CObject					* master = getList()->getFirst();
+	CObject					* slave;
+	AObject 				* master_obj;
+	AObject 				* slave_obj;
+
+	while (master) {
+		master_obj = master->getObj();
+		slave = master->getNext();
+		
+		while (slave) {
+			slave_obj = slave->getObj();
+
+			if (master_obj->getX() == slave_obj->getX() and master_obj->getY() == slave_obj->getY()) {
+				getList()->removeObject(slave_obj);
+				getList()->removeObject(master_obj);
+				checkColision();
+				return ;
+			}		
+
+			slave = slave->getNext();
+		}
+		master = master->getNext();
+	}
 	return ;
 }
 

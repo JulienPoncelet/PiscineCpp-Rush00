@@ -14,10 +14,13 @@ public:
 	Map 					& operator=(Map const & src);
 
 	std::string				toString(void) const;
-	void					display(void) const;
+
 	void					pushObject(AObject * newObject);
 	void					popObject(AObject * newObject);
-	// void					checkColision(void);
+
+	void					addRandomEnemy(void);
+	void					moveAll(void);
+	void					checkColision(void);
 
 	uint					getMaxX(void) const;
 	uint					getMaxY(void) const;
