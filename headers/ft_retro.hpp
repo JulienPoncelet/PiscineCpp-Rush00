@@ -7,6 +7,14 @@
 
 typedef unsigned int uint;
 
+enum plan_e {
+	BACKGROUND = 1, MIDDLEGROUND, FOREGROUND
+};
+
+enum direction_e {
+	UP = 1, RIGHT, DOWN, LEFT 
+};
+
 class Map;
 class AObject;
 class CObject;

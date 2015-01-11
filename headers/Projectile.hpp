@@ -8,7 +8,7 @@ class Projectile : public virtual AObject {
 public:
 
 	Projectile(void);
-	Projectile(uint x, uint y, AObject::plan_e z, direction_e dir, uint dmg);
+	Projectile(uint x, uint y, plan_e z, Map * map, direction_e dir, uint dmg);
 	Projectile(Projectile const & src);
 	~Projectile(void);
 

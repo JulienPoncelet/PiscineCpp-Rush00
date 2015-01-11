@@ -3,15 +3,14 @@
 AObject::AObject(void) : _z(MIDDLEGROUND) {
 	setX(0);
 	setY(0);
-	// setMap(NULL);
+	setMap(NULL);
 	return ;
 }
 
-// ADD MAP
-AObject::AObject(uint x, uint y, plan_e z) : _z(z) {
+AObject::AObject(uint x, uint y, plan_e z, Map * map) : _z(z) {
 	setX(x);
 	setY(y);
-	// setMap(Map);
+	setMap(map);
 	return ;
 }
 
@@ -27,7 +26,7 @@ AObject::~AObject(void) {
 AObject 					& AObject::operator=(AObject const & rhs) {
 	setX(rhs.getX());
 	setY(rhs.getY());
-	// setMap(rhs.getMap());
+	setMap(rhs.getMap());
 	return *this;
 }
 
@@ -50,7 +49,7 @@ std::string 				AObject::toString(void) const {
 	out << "\tX: " << getX() << std::endl;
 	out << "\tY: " << getY() << std::endl;
 	out << "\tZ: " << getZ() << std::endl;
-	// out << "\tMap ptr: " << getMap() << std::endl;
+	out << "\tMap ptr: " << getMap() << std::endl;
 	out << "\033[0m";
 	return out.str();
 }
@@ -67,13 +66,13 @@ uint				AObject::getY(void) const {
 	return _y;
 }
 
-AObject::plan_e		AObject::getZ(void) const {
+plan_e				AObject::getZ(void) const {
 	return _z;
 }
 
-// Map 				AObject::getMap(void) const {
-// 	return _map;
-// }
+Map 				* AObject::getMap(void) const {
+	return _map;
+}
 
 void				AObject::setIndex(uint index) {
 	_index = index;
@@ -90,7 +89,7 @@ void				AObject::setY(uint y) {
 	return ;
 }
 
-// void			AObject::setMap(Map * map) {
-// 	_map = map;
-// 	return ;
-// }
+void			AObject::setMap(Map * map) {
+	_map = map;
+	return ;
+}
