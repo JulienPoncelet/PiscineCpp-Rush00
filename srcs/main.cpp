@@ -7,13 +7,14 @@ int					main(void) {
 	CObject			* list   = new CObject(player);
 	Map				* map    = new Map(40, 40, list);
 
-	Window			win (map);
+	Window			* win 	 = new Window(map);
 
 	player->setMap(map);
 	player->move(19, 39);
 	player->setHp(3);
 
-	win.menu();
+	win->menu();
+	delete win;
 
 	return 0;
 }

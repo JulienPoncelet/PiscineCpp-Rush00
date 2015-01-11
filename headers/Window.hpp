@@ -15,6 +15,7 @@ private:
 	int const		_menuChoices;
 	std::string  	_choices[2];
 	Map				*_map;
+	time_t			_start;
 
 
 

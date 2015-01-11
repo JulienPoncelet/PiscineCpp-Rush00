@@ -55,7 +55,6 @@ std::string 				Enemy::toString(void) const {
 }
 
 void						Enemy::destroy(void) {
-	getMap()->setScore(getScore() + 10);
 	getMap()->getList()->removeObject(this);
 	return ;
 }

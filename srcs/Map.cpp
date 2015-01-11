@@ -119,6 +119,8 @@ void						Map::checkColision(void) {
 			slave_obj = slave->getObj();
 
 			if (master_obj->getX() == slave_obj->getX() and master_obj->getY() == slave_obj->getY()) {
+				if (master_obj->getType() == PROJECTILE or slave_obj->getType() == PROJECTILE)
+					setScore(getScore() + 1000);
 				master_obj->destroy();				
 				slave_obj->destroy();				
 				checkColision();

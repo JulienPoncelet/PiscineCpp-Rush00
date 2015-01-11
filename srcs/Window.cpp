@@ -2,29 +2,25 @@
 
 
 // constructors /destructor
-Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2) {
-	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
+Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2), _start(time(0)) {
 	this->_choices[0] = "Play";
 	this->_choices[1] = "Exit";
 	_initNcurses();
 }
 
-Window::Window(Map * map) : _choice(0), _highlight(1), _menuChoices(2), _map(map) {
-	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
+Window::Window(Map * map) : _choice(0), _highlight(1), _menuChoices(2), _map(map), _start(time(0))  {
 	this->_choices[0] = "Play";
 	this->_choices[1] = "Exit";
 	_initNcurses();
 }
 
-Window::Window(Window const & window) : _menuChoices(2){
-	std::cout << "Window's copy constructor called" << std::endl;
+Window::Window(Window const & window) : _menuChoices(2), _start(time(0)) {
 	this->_choices[0] = "Play";
 	this->_choices[1] = "Exit";
 	*this = window;
 }
 
 Window::~Window(void) {
-	std::cout << "Window's destructor called" << std::endl;
 	clrtoeol();
 	refresh();
 	endwin();
@@ -120,13 +116,17 @@ void Window::_displayGame() {
 	uint 		color;
 	char 		obj[2] = " ";
 	uint		hp;
+	time_t 		t;
 
 	wclear(this->_gameWin);
 	box(this->_gameWin, 0, 0);
 
 	CObject *list = this->_map->getList()->getFirst();
 	hp = list->getObj()->getHp();
-	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 6, "life: ");
+	t = time(0) - this->_start;
+	mvwprintw(this->_gameWin, 1, 1, " TIME : %02d:%02d", t/60, t);
+	mvwprintw(this->_gameWin, 2, 1, " SCORE : %u", this->_map->getScore());
+	mvwprintw(this->_gameWin, 1, this->_map->getMaxX() - hp - 7, "LIFE : ");
 	obj[0] = 'o';
 	while (hp) {
 		wattron(this->_gameWin, COLOR_PAIR(RED));
@@ -196,6 +196,7 @@ void Window::_playGame(void) {
 		this->_map->checkColision();
 		this->_map->moveEnemy();
 		this->_map->moveProjectile();
+		this->_map->setScore(this->_map->getScore() + 1);
 
 		now = clock();
 		wrefresh(this->_gameWin);
