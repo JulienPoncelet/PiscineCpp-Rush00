@@ -11,6 +11,7 @@ Player::Player(void) : AObject(), AShip() {
 Player::Player(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
 				: AObject(x, y, z, map), AShip(x, y, z, map, hp, max_hp, dmg) {
 	setIndex(_amount++);
+	setType(PLAYER);
 	return ;
 }
 
@@ -64,8 +65,6 @@ void						Player::move(uint x, uint y) {
 }
 
 void			Player::shoot(void) const {
-	// Item 		* projectile =  Projectile(UP, getDmg(), getX(), getY() - 1);
-void						Player::shoot(void) const {
 	AObject 				* projectile = new Projectile(getX(), getY() - 1, getZ(), getMap(), UP, getDmg());
 
 	projectile->getMap()->pushObject(projectile);

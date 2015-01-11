@@ -15,6 +15,7 @@ public:
 	Projectile 				& operator=(Projectile const & src);
 
 	virtual std::string		toString(void) const;
+	virtual void			shoot(void) const;
 
 	direction_e				getDir(void) const;
 	uint					getDmg(void) const;

@@ -16,6 +16,7 @@ public:
 
 	virtual void			move(uint x, uint y);
 	virtual std::string		toString(void) const;
+	virtual void			shoot(void) const = 0;
 	
 	uint					getIndex(void) const;
 	objType_e				getType(void) const;
