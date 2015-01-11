@@ -19,22 +19,28 @@ public:
 	void					popObject(AObject * newObject);
 
 	void					addRandomEnemy(void);
-	void					moveAll(void);
+	void					moveEnemy(void);
+	void					moveProjectile(void);
 	void					checkColision(void);
+
+	void					endGame(void);
 
 	uint					getMaxX(void) const;
 	uint					getMaxY(void) const;
 	CObject					* getList(void) const;
+	bool					getEnd(void) const;
 
 	void					setMaxX(uint maxX);
 	void					setMaxY(uint maxY);
 	void					setList(CObject * newList);
+	void					setEnd(bool end);
 
 private:
 
 	uint					_maxX;	
 	uint					_maxY;
 	CObject					* _list;
+	bool					_end;
 
 	Map(void); // Don't call this bitch
 

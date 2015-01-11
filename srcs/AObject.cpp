@@ -54,6 +54,11 @@ std::string 				AObject::toString(void) const {
 	return out.str();
 }
 
+void						AObject::destroy(void) {
+	getMap()->getList()->removeObject(this);
+	return ;
+}
+
 uint				AObject::getIndex(void) const {
 	return _index;
 }
