@@ -4,6 +4,9 @@
 # include <iostream>
 # include <sstream>
 # include <ncurses.h>
+# include <unistd.h>
+# include <ctime>
+# include <stdlib.h>
 
 typedef unsigned int uint;
 

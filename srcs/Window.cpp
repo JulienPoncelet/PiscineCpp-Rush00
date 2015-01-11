@@ -1,5 +1,6 @@
 #include <ft_retro.hpp>
 
+
 // constructors /destructor
 Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2) {
 	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
@@ -138,27 +139,50 @@ void Window::_displayGame() {
 void Window::_playGame(void) {
 	clear();
 	this->_gameWin = newwin(this->_map->getMaxY() + 2, this->_map->getMaxX() + 2, 0, 0);
-	int ch;
-	int y;
 	keypad(this->_gameWin, TRUE);
-	AObject *player = this->_map->getList()->getFirst()->getObj();
 	halfdelay(1);
 	this->_displayGame();
+
+	clock_t				start;
+	int 				randomEnemy = 5;
+	int 				input;
+	int 				y;
+	clock_t				now;
+	AObject				* player = this->_map->getList()->getFirst()->getObj();
 	while (42){
-		ch = wgetch(this->_gameWin);
-		if (ch == KEY_LEFT){
+		start = clock();
+
+		if (randomEnemy++ == 5) {
+			this->_map->addRandomEnemy();
+			randomEnemy = 0;
+		}
+
+		input = wgetch(this->_gameWin);
+
+		if (input == KEY_LEFT){
 			y = ((int)(player->getX() - 1) >= 0 ? player->getX() - 1 : 0);
 			player->move(y, player->getY());
-		}else if (ch == KEY_RIGHT){
+		}
+
+		else if (input == KEY_RIGHT)
 			player->move(player->getX() + 1,player->getY());
-		}else if (ch == ' '){
+
+		else if (input == ' ')
 			player->shoot();
-		}else if (ch == 'e') {
+
+		else if (input == 'e') {
 			wclear(this->_gameWin);
 			wrefresh(this->_gameWin);
 			delwin(this->_gameWin);
 			return;
 		}
+		
+		this->_map->moveAll();
+		this->_map->checkColision();
+		now = clock();
+		int wait = (CLOCKS_PER_SEC / 12) - ( now - start );
+		usleep(wait);
+
 		this->_displayGame();
 	}
 }
