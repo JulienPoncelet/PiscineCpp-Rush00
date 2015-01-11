@@ -116,9 +116,17 @@ void Window::_displayGame() {
 	CObject *list = this->_map->getList()->getFirst();
 
 	while (list) {
-		{
+		if (list->getObj()->getType() == PLAYER){
 			wattron(this->_gameWin, A_REVERSE | A_BOLD);
 			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "@");
+			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+		} else if (list->getObj()->getType() == ENEMY){
+			wattron(this->_gameWin, A_REVERSE | A_BOLD);
+			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "#");
+			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+		} else if (list->getObj()->getType() == PROJECTILE){
+			wattron(this->_gameWin, A_REVERSE | A_BOLD);
+			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "|");
 			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
 		}
 		list = list->getNext();
@@ -134,7 +142,7 @@ void Window::_playGame(void) {
 	int y;
 	keypad(this->_gameWin, TRUE);
 	AObject *player = this->_map->getList()->getFirst()->getObj();
-	halfdelay(255);
+	halfdelay(1);
 	this->_displayGame();
 	while (42){
 		ch = wgetch(this->_gameWin);
@@ -143,8 +151,9 @@ void Window::_playGame(void) {
 			player->move(y, player->getY());
 		}else if (ch == KEY_RIGHT){
 			player->move(player->getX() + 1,player->getY());
+		}else if (ch == ' '){
+			player->shoot();
 		}else if (ch == 'e') {
-			// wborder(this->_gameWin, ' ', ' ', ' ',' ',' ',' ',' ',' ');
 			wclear(this->_gameWin);
 			wrefresh(this->_gameWin);
 			delwin(this->_gameWin);
