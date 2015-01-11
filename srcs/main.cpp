@@ -6,6 +6,9 @@
 
 int main(void)
 {
+	Window win;
+
+	win.menu();
 	/* code */
 	return 0;
 }
