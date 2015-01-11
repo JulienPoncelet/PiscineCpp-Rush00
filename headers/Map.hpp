@@ -29,11 +29,13 @@ public:
 	uint					getMaxY(void) const;
 	CObject					* getList(void) const;
 	bool					getEnd(void) const;
+	uint					getScore(void) const;
 
 	void					setMaxX(uint maxX);
 	void					setMaxY(uint maxY);
 	void					setList(CObject * newList);
 	void					setEnd(bool end);
+	void					setScore(uint score);
 
 private:
 
@@ -41,6 +43,7 @@ private:
 	uint					_maxY;
 	CObject					* _list;
 	bool					_end;
+	uint					_score;
 
 	Map(void); // Don't call this bitch
 

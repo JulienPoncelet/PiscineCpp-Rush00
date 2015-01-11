@@ -16,6 +16,7 @@ public:
 
 	virtual void			shoot(void) const;
 	virtual std::string		toString(void) const;
+	virtual void			destroy(void);
 
 private:
 

@@ -5,6 +5,7 @@ Map::Map(void) {
 	setMaxY(40);
 	setList(NULL);
 	setEnd(false);
+	setScore(0);
 	return ;
 }
 
@@ -13,6 +14,7 @@ Map::Map(uint maxX, uint maxY, CObject * newList) {
 	setMaxY(maxY);
 	setList(newList);
 	setEnd(false);
+	setScore(0);
 	return ;
 }
 
@@ -29,6 +31,8 @@ Map & Map::operator=(Map const & rhs) {
 	setMaxX(rhs.getMaxX());
 	setMaxY(rhs.getMaxY());
 	setList(rhs.getList());
+	setEnd(rhs.getEnd());
+	setScore(rhs.getScore());
 	return *this;
 }
 
@@ -160,6 +164,10 @@ bool						Map::getEnd(void) const {
 	return _end;
 }
 
+uint						Map::getScore(void) const {
+	return _score;
+}
+
 void						Map::setMaxX(uint maxX) {
 	_maxX = maxX;
 	return ;
@@ -177,5 +185,10 @@ void						Map::setList(CObject * newList) {
 
 void						Map::setEnd(bool end) {
 	_end = end;
+	return ;
+}
+
+void						Map::setScore(uint score) {
+	_score = score;
 	return ;
 }
