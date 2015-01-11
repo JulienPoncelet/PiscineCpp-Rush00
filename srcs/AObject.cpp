@@ -58,6 +58,10 @@ uint				AObject::getIndex(void) const {
 	return _index;
 }
 
+objType_e			AObject::getType(void) const {
+	return _type;
+}
+
 uint				AObject::getX(void) const {
 	return _x;
 }
@@ -79,6 +83,11 @@ void				AObject::setIndex(uint index) {
 	return ;
 }
 
+void				AObject::setType(objType_e type) {
+	_type = type;
+	return ;
+}
+
 void				AObject::setX(uint x) {
 	_x = x;
 	return ;
@@ -89,7 +98,7 @@ void				AObject::setY(uint y) {
 	return ;
 }
 
-void			AObject::setMap(Map * map) {
+void				AObject::setMap(Map * map) {
 	_map = map;
 	return ;
 }

@@ -4,6 +4,7 @@ uint						Player::_amount = 0;
 
 Player::Player(void) : AObject(), AShip() {
 	setIndex(_amount++);
+	setType(PLAYER);
 	return ;
 }
 

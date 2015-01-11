@@ -15,6 +15,10 @@ enum direction_e {
 	UP = 1, RIGHT, DOWN, LEFT 
 };
 
+enum objType_e {
+	PLAYER = 1, ENEMY, PROJECTILE 
+};
+
 class Map;
 class AObject;
 class CObject;

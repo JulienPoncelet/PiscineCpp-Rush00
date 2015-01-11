@@ -4,6 +4,7 @@ uint						Projectile::_amount = 0;
 
 Projectile::Projectile(void) : AObject() {
 	setIndex(_amount++);
+	setType(PROJECTILE);
 	setDir(UP);
 	setDmg(1);
 	return ;
