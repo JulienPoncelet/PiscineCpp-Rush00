@@ -82,8 +82,9 @@ void Window::menu(void) {
 				wclear(this->_menuWin);
 				wrefresh(this->_menuWin);
 				this->_playGame();
+				break ;
 			}else if (this->_choice == 2) {
-				break;
+				break ;
 			}
 		}
 			this->_choice = 0;
