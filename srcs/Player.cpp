@@ -7,7 +7,7 @@ Player::Player(void) : AObject(), AShip() {
 	return ;
 }
 
-Player::Player(uint x, uint y, AObject::plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
+Player::Player(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg)
 				: AObject(x, y, z, map), AShip(x, y, z, map, hp, max_hp, dmg) {
 	setIndex(_amount++);
 	return ;

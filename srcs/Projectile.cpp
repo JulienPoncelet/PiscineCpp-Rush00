@@ -6,7 +6,7 @@ Projectile::Projectile(void) : AObject() {
 	return ;
 }
 
-Projectile::Projectile(uint x, uint y, AObject::plan_e z, Map * map, direction_e dir, uint dmg)
+Projectile::Projectile(uint x, uint y, plan_e z, Map * map, direction_e dir, uint dmg)
 						: AObject(x, y, z, map) {
 	setDir(dir);
 	setDmg(dmg);
@@ -51,7 +51,7 @@ std::string 				Projectile::toString(void) const {
 	return out.str();
 }
 
-AObject::direction_e		Projectile::getDir(void) const {
+direction_e					Projectile::getDir(void) const {
 	return _dir;
 }
 
@@ -59,7 +59,7 @@ uint						Projectile::getDmg(void) const {
 	return _dmg;
 }
 
-void						Projectile::setDir(AObject::direction_e dir) {
+void						Projectile::setDir(direction_e dir) {
 	_dir = dir;
 	return ;
 }

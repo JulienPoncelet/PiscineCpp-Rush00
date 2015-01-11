@@ -66,7 +66,7 @@ uint				AObject::getY(void) const {
 	return _y;
 }
 
-AObject::plan_e		AObject::getZ(void) const {
+plan_e				AObject::getZ(void) const {
 	return _z;
 }
 

@@ -8,7 +8,7 @@ class Player : public virtual AShip {
 public:
 
 	Player(void);
-	Player(uint x, uint y, AObject::plan_e z, Map * map, uint hp, uint max_hp, uint dmg);
+	Player(uint x, uint y, plan_e z, Map * map, uint hp, uint max_hp, uint dmg);
 	Player(Player const & src);
 	~Player(void);
 
