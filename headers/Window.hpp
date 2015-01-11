@@ -21,6 +21,7 @@ private:
 	void _displayMenu(void);
 	void _displayGame(void);
 	void _playGame(void);
+	void _initNcurses(void);
 
 public:
 

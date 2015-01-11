@@ -6,24 +6,14 @@ Window::Window(void) : _choice(0), _highlight(1), _menuChoices(2) {
 	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
 	this->_choices[0] = "Play";
 	this->_choices[1] = "Exit";
-	initscr();
-	clear();
-	cbreak();
-	noecho();
-	curs_set(0);
-	getmaxyx(stdscr,this->_row,this->_col);
+	_initNcurses();
 }
 
 Window::Window(Map * map) : _choice(0), _highlight(1), _menuChoices(2), _map(map) {
 	std::cout << "Window's constructor called"<< _highlight << _menuChoices << std::endl;
 	this->_choices[0] = "Play";
 	this->_choices[1] = "Exit";
-	initscr();
-	clear();
-	cbreak();
-	noecho();
-	curs_set(0);
-	getmaxyx(stdscr,this->_row,this->_col);
+	_initNcurses();
 }
 
 Window::Window(Window const & window) : _menuChoices(2){
@@ -50,8 +40,22 @@ std::string const Window::string(void) const {
 	return res;
 }
 
-void Window::menu(void) {
+void Window::_initNcurses(void) {
+	initscr();
 	clear();
+	cbreak();
+	noecho();
+	curs_set(0);
+	getmaxyx(stdscr,this->_row,this->_col);
+	start_color();
+	init_pair(RED, COLOR_RED, COLOR_BLACK);
+	init_pair(BLUE, COLOR_BLUE, COLOR_BLACK);
+	init_pair(GREEN, COLOR_GREEN, COLOR_BLACK);
+	init_pair(WHITE, COLOR_WHITE, COLOR_BLACK);
+	init_pair(YELLOW, COLOR_YELLOW, COLOR_BLACK);
+}
+
+void Window::menu(void) {
 	this->_menuWin = newwin(10, 30, this->_row/2-5, this->_col/2-15);
 	keypad(this->_menuWin, TRUE);
 	int ch;
@@ -81,9 +85,9 @@ void Window::menu(void) {
 			}else if (this->_choice == 2) {
 				break;
 			}
+		}
 			this->_choice = 0;
 			ch = 0;
-		}
 		clear();
 		this->_displayMenu();
 	}
@@ -91,8 +95,9 @@ void Window::menu(void) {
 
 void Window::_displayMenu(void) {
 	int x, y, i;
-	x = 12;
-	y = 4;
+
+	x = 10;
+	y = 10/2 - this->_menuChoices/2 - 1;
 	box(this->_menuWin, 0, 0);
 	for(i = 0; i < this->_menuChoices; ++i)
 	{	if(this->_highlight == i + 1) /* High light the present choice */
@@ -111,6 +116,9 @@ void Window::_displayMenu(void) {
 }
 
 void Window::_displayGame() {
+	uint 		color;
+	char 		obj[2] = " ";
+
 	wclear(this->_gameWin);
 	box(this->_gameWin, 0, 0);
 
@@ -118,18 +126,20 @@ void Window::_displayGame() {
 
 	while (list) {
 		if (list->getObj()->getType() == PLAYER){
-			wattron(this->_gameWin, A_REVERSE | A_BOLD);
-			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "@");
-			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+			obj[0] = '@';
+			color = A_REVERSE | A_BOLD | COLOR_PAIR(GREEN);
 		} else if (list->getObj()->getType() == ENEMY){
-			wattron(this->_gameWin, A_REVERSE | A_BOLD);
-			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "#");
-			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+			obj[0] = '#';
+			color = COLOR_PAIR(RED);
 		} else if (list->getObj()->getType() == PROJECTILE){
-			wattron(this->_gameWin, A_REVERSE | A_BOLD);
-			mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, "|");
-			wattroff(this->_gameWin, A_REVERSE | A_BOLD);
+			obj[0] = '|';
+			color = COLOR_PAIR(YELLOW);
 		}
+
+		wattron(this->_gameWin, color);
+		mvwprintw(this->_gameWin, list->getObj()->getY() + 1, list->getObj()->getX() + 1, obj);
+		wattroff(this->_gameWin, color);
+
 		list = list->getNext();
 	}
 
@@ -146,7 +156,6 @@ void Window::_playGame(void) {
 	clock_t				start;
 	int 				randomEnemy = 5;
 	int 				input;
-	int 				y;
 	clock_t				now;
 	AObject				* player = this->_map->getList()->getFirst()->getObj();
 	while (42){
@@ -159,10 +168,8 @@ void Window::_playGame(void) {
 
 		input = wgetch(this->_gameWin);
 
-		if (input == KEY_LEFT){
-			y = ((int)(player->getX() - 1) >= 0 ? player->getX() - 1 : 0);
-			player->move(y, player->getY());
-		}
+		if (input == KEY_LEFT)
+			player->move((player->getX()!= 0 ? player->getX() - 1 : 0), player->getY());
 
 		else if (input == KEY_RIGHT)
 			player->move(player->getX() + 1,player->getY());

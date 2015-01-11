@@ -21,6 +21,9 @@ enum direction_e {
 enum objType_e {
 	PLAYER = 1, ENEMY, PROJECTILE 
 };
+enum color_e {
+	RED = 1, BLUE, GREEN, WHITE, YELLOW
+};
 
 class Map;
 class AObject;
